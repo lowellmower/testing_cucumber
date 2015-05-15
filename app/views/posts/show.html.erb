@@ -1,0 +1,20 @@
+<h1><%= @post.title %></h1>
+
+<p><%= @post.body %></p>
+
+<%= link_to "delete", post_path, :method => 'delete' %>
+
+<% for comment in @post.comments %>
+  <%= div_for(comment) do %>
+    <h2>Comment by: <%= comment.name%></h2>
+    <%= simple_format comment.body %>
+  <%end%>
+<%end%>
+
+<%= form_for([@post, @comment]) do |f|%>
+  <%= f.label :name, "Name" %>
+  <%= f.text_field :name %><br /><br />
+  <%= f.label :body, "Body" %>
+  <%= f.text_field :body %>
+  <%= f.submit "Submit Comment"%>
+<%end%>
